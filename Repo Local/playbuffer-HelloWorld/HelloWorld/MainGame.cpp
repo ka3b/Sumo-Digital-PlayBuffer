@@ -21,23 +21,23 @@ enum GameObjectType {
 
 void HandlePlayerControls();
 // The entry point for a PlayBuffer program
-void MainGameEntry( PLAY_IGNORE_COMMAND_LINE )
+void MainGameEntry(PLAY_IGNORE_COMMAND_LINE)
 {
-	Play::CreateManager( DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_SCALE );
+	Play::CreateManager(DISPLAY_WIDTH, DISPLAY_HEIGHT, DISPLAY_SCALE);
 	Play::CentreAllSpriteOrigins();
 	Play::LoadBackground("Data\\Backgrounds\\background.png");
 	Play::StartAudioLoop("music");
-	Play::CreateGameObject(TYPE_AGENT8, { 115,0 }, 50,"agent8");
+	Play::CreateGameObject(TYPE_AGENT8, { 115,0 }, 50, "agent8");
 }
 
 // Called by PlayBuffer every frame (60 times a second!)
-bool MainGameUpdate( float elapsedTime )
+bool MainGameUpdate(float elapsedTime)
 {
 	gameState.timer += elapsedTime;
 	Play::ClearDrawingBuffer(Play::cOrange);
 
-	Play::DrawDebugText({ DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2 },Play::GetSpriteName(gameState.spriteId), Play::cWhite);
-	
+	Play::DrawDebugText({ DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 }, Play::GetSpriteName(gameState.spriteId), Play::cWhite);
+
 	Play::DrawSprite(gameState.spriteId, Play::GetMousePos(), gameState.timer);
 
 	if (Play::KeyPressed(VK_SPACE))
@@ -46,11 +46,11 @@ bool MainGameUpdate( float elapsedTime )
 	Play::DrawBackground();
 	HandlePlayerControls();
 	Play::PresentDrawingBuffer();
-	return Play::KeyDown( VK_ESCAPE );
+	return Play::KeyDown(VK_ESCAPE);
 }
 
 // Gets called once when the player quits the game 
-int MainGameExit( void )
+int MainGameExit(void)
 {
 	Play::DestroyManager();
 	return PLAY_OK;
@@ -81,4 +81,3 @@ void HandlePlayerControls() {
 	Play::DrawObjectRotated(obj_agent8);
 
 }
-
